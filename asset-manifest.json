@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/hiphop-book-ver2/static/css/main.52367b96.css",
-    "main.js": "/hiphop-book-ver2/static/js/main.ef090464.js",
+    "main.js": "/hiphop-book-ver2/static/js/main.dd8e0bc8.js",
     "static/js/787.f32faf5e.chunk.js": "/hiphop-book-ver2/static/js/787.f32faf5e.chunk.js",
     "index.html": "/hiphop-book-ver2/index.html",
     "main.52367b96.css.map": "/hiphop-book-ver2/static/css/main.52367b96.css.map",
-    "main.ef090464.js.map": "/hiphop-book-ver2/static/js/main.ef090464.js.map",
+    "main.dd8e0bc8.js.map": "/hiphop-book-ver2/static/js/main.dd8e0bc8.js.map",
     "787.f32faf5e.chunk.js.map": "/hiphop-book-ver2/static/js/787.f32faf5e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.52367b96.css",
-    "static/js/main.ef090464.js"
+    "static/js/main.dd8e0bc8.js"
   ]
 }
