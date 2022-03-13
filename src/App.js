@@ -12,11 +12,15 @@ function App() {
   let [loading, setLoading] = useState(true);
   let [search, setSearch] = useState([]);
 
+  let [limit, setLimit] = useState(7);
+  let [page, setPage] = useState(1);
+  let offset = (page - 1) * limit;
+
   let alphaBtn = Array.from({ length: 26 }, (v, i) =>
     String.fromCharCode(i + 65)
   );
   alphaBtn.push("etc", "View All");
-
+  let count = 0;
   useEffect(() => {
     axios
       .get("https://9dea6967-5687-42c4-90a7-ef1d969b53ff.mock.pstmn.io/list")
@@ -42,7 +46,6 @@ function App() {
     }
     setSearch(filterData);
   };
-
   return (
     <div className="App">
       <div className="nav-bar">
@@ -61,15 +64,17 @@ function App() {
               <p>Loading...</p>
             </div>
           ) : (
-            alphaBtn.map((item) => {
+            alphaBtn.map((item, idx) => {
               return (
                 <Button
                   variant="outline-secondary"
                   size="lg"
                   onClick={(e) => {
                     setAlphabet(e.target.value);
+                    setPage(1);
                   }}
                   value={item}
+                  key={idx}
                 >
                   {item}
                 </Button>
@@ -86,18 +91,38 @@ function App() {
                   x.name.substring(0, 1).toLowerCase() ===
                   alphabet.toLowerCase()
                 ) {
+                  count++;
+                  console.log(count);
                   return <Title x={x} />;
                 } else if (
                   Number.isInteger(Number(x.name.substring(0, 1))) &&
                   alphabet === "etc"
                 ) {
-                  return <Title x={x} />;
-                } else if (alphabet === "View All") {
+                  count++;
+                  console.log(count);
                   return <Title x={x} />;
                 }
               })}
+              {alphabet === "View All"
+                ? mydata.slice(offset, offset + limit).map((x) => {
+                    count++;
+                    console.log(count);
+                    return <Title x={x} />;
+                  })
+                : null}
+              {alphabet === "View All" ? (
+                <Pagination
+                  total={mydata.length}
+                  limit={limit}
+                  page={page}
+                  setPage={setPage}
+                />
+              ) : null}
             </div>
           </div>
+          {count === 0 && alphabet !== "" ? (
+            <div className="none-data">해당하는 데이터가 없습니다 !</div>
+          ) : null}
         </Route>
 
         <Route path="/info/:id">
@@ -124,7 +149,7 @@ function SearchBar({ updateChange, search, setSearch }) {
       {search.map((item) => {
         return (
           <>
-            <div className="search-result">
+            <div className="search-result" key={item.id}>
               <Link to={"/info/" + item.id}>
                 <p onClick={() => setSearch([])}>
                   {item.name} ({item.kor_name})
@@ -146,6 +171,33 @@ function Title({ x }) {
           {x.name} {"(" + x.kor_name + ")"}
         </p>
       </Link>
+    </div>
+  );
+}
+function Pagination({ total, limit, page, setPage }) {
+  let numPages = Math.ceil(total / limit);
+  if (numPages === 0) {
+    numPages = 1;
+  }
+  return (
+    <div className="page-btn">
+      <button onClick={() => setPage(page - 1)} disabled={page === 1}>
+        &lt;
+      </button>
+      {Array(numPages)
+        .fill()
+        .map((_, i) => (
+          <button
+            key={i + 1}
+            onClick={() => setPage(i + 1)}
+            aria-current={page === i + 1 ? "page" : null}
+          >
+            {i + 1}
+          </button>
+        ))}
+      <button onClick={() => setPage(page + 1)} disabled={page === numPages}>
+        &gt;
+      </button>
     </div>
   );
 }

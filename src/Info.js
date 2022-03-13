@@ -7,6 +7,7 @@ import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 function Info(props) {
   let { id } = useParams();
+
   let findItem = props.mydata.find((item) => {
     return item.id == id;
   });
@@ -50,14 +51,15 @@ function Info(props) {
         </Badge>
         {comment === null
           ? null
-          : comment.map((x) => {
+          : comment.map((x, idx) => {
               return (
-                <div className="comment">
+                <div className="comment" key={idx}>
                   <span className="contents">{x.contents}</span>{" "}
                   <span className="date">{x.date}</span>
                 </div>
               );
             })}
+
         <div className="comment-box">
           <input
             onChange={(e) => {
@@ -105,4 +107,5 @@ function Info(props) {
     </>
   );
 }
+
 export default Info;

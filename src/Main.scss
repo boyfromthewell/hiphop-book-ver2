@@ -2,13 +2,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 100px;
+    margin-top: 15px;
+    margin-bottom: 30px;
 }
 .main-box{
     background-color: #ecf0f1;
-    width: 700px;
+    width: 600px;
     height: auto;
     border-radius: 10px;
+}
+.none-data{
+    color:white;
+    font-weight: bold;
+    font-size: 20px;
 }
 .artist{
    display: flex;
@@ -23,9 +29,13 @@
         border-radius: 30%;
     }
     p{  
-        padding-top: 45px;
-        margin-left: 25px;
-        font-size: 25px;
+        padding-top: 50px;
+        margin-left: 20px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    p:hover{
+        text-decoration: underline; color: black;
     }
     a{
         text-decoration: none;
@@ -67,8 +77,8 @@
     img{
         width: auto;
         height: auto;
-        max-width: 150px;
-        height: 150px;
+        max-width: 200px;
+        height: 200px;
         border-radius: 10%;
     }
     
@@ -106,6 +116,7 @@
     }
     svg{
         font-size: 35px;
+        margin-left: 10px;
     }
     a{
         color: black;
@@ -197,6 +208,28 @@
     border: none;
     border-radius: 5%;
     padding:0;
+}
+.page-btn{
+    gap:4px;
+    margin: 16px;
+    button{
+        border: none;
+        border-radius: 8px;
+        padding: 8px;
+        margin-left: 5px;
+        background: black;
+        color: white;
+        font-size: 1rem;
+    }   
+    button:disabled {
+        background: grey;
+        cursor: revert;
+        transform: revert;
+      }
+      button:focus{
+        background: blue;
+        font-weight: bold;
+      }
 }
 
 
